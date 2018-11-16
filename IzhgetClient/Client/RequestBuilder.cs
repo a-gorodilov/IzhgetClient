@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 
 namespace Client
 {
@@ -12,8 +13,7 @@ namespace Client
             
             var parametersString = string.Join("&", parameters.Select(x => $"{x.Key}={x.Value}"));
             
-            httpRequestMessage.Content = new StringContent(parametersString);
-            httpRequestMessage.Headers.Add("Content-Type", IzhgetRequestParams.ContentType);
+            httpRequestMessage.Content = new StringContent(parametersString, Encoding.UTF8, IzhgetRequestParams.ContentType);
 
             return httpRequestMessage;
         }
