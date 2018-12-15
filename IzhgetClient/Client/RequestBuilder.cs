@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Client
 {
-    public class RequestBuilder : IRequestBuilder
+    public static class RequestBuilder
     {
-        public HttpRequestMessage Build(Dictionary<string, string> parameters)
+        public static HttpRequestMessage Build(Dictionary<string, string> parameters)
         {
             var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, IzhgetRequestParams.Url);
             

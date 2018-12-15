@@ -4,18 +4,11 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    public class Sender : ISender
+    public static class Sender
     {
-        private readonly IRequestBuilder requestBuilder;
-
-        public Sender(IRequestBuilder requestBuilder)
+        public static async Task<string> GetScheduleResponseText(Dictionary<string, string> parameters)
         {
-            this.requestBuilder = requestBuilder;
-        }
-        
-        public async Task<string> GetScheduleResponseText(Dictionary<string, string> parameters)
-        {
-            var request = requestBuilder.Build(parameters);
+            var request = RequestBuilder.Build(parameters);
 
             HttpResponseMessage response;
             using (var httpClient = new HttpClient())

@@ -1,9 +1,11 @@
+using System;
+using System.Globalization;
 using System.Linq;
 using HtmlAgilityPack;
 
 namespace Client
 {
-    public class IzhgetHtmlResponseParser : IIzhgetHtmlResponseParser
+    public class IzhgetHtmlResponseParser
     {
         public RouteData[] Parse(string html)
         {
@@ -21,11 +23,16 @@ namespace Client
                 .Select(x => new RouteData
                 {
                     RouteNumber = int.Parse(x[0]),
-                    DateFrom = x[2],
-                    DateTo = x[3]
+                    DateFrom = ConvertIzhgetTime(x[2]),
+                    DateTo = ConvertIzhgetTime(x[3]),
                 }).ToArray();
 
             return routeDatas;
+        }
+
+        private static DateTime ConvertIzhgetTime(string timeString)
+        {
+            return DateTime.ParseExact(timeString, "HH:mm", CultureInfo.InvariantCulture);
         }
     }
 }
