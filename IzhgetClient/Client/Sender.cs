@@ -18,7 +18,7 @@ namespace Client
 
             if (!response.IsSuccessStatusCode)
             {
-                return "Что-то пошло не так!";
+                return "Something goes wrong!";
             }
 
             return await response.Content.ReadAsStringAsync().ConfigureAwait(false);

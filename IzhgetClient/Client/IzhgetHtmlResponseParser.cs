@@ -7,7 +7,7 @@ namespace Client
 {
     public class IzhgetHtmlResponseParser
     {
-        public RouteData[] Parse(string html)
+        public static RouteData[] Parse(string html)
         {
             var cleanHtml = html.Replace("\n", "");
             var htmlDocument = new HtmlDocument();
@@ -18,8 +18,8 @@ namespace Client
             var routesInfoText = routeNodes
                 .Select(x => x.ChildNodes.Nodes().Select(y => y.InnerText).ToArray());
             
-            var routeDatas = routesInfoText
-                .Where(x => x.Length == 4)
+            var routeData = routesInfoText
+                .Where(x => x.Length == 4)    // base route-data array length
                 .Select(x => new RouteData
                 {
                     RouteNumber = int.Parse(x[0]),
@@ -27,7 +27,7 @@ namespace Client
                     DateTo = ConvertIzhgetTime(x[3]),
                 }).ToArray();
 
-            return routeDatas;
+            return routeData;
         }
 
         private static DateTime ConvertIzhgetTime(string timeString)
